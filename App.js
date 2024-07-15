@@ -1,39 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Task from './components/Task';
+import { StyleSheet, View } from 'react-native';
+import TaskList from './components/TaskList';
+import AddTask from './components/AddTask';
+import { useState } from 'react';
 
 export default function App() {
-    return (
-        <View style={styles.container}>
-            <View style={styles.tasksWrapper}>
-                <Text style={styles.sectionTitle}>Today's Tasks</Text>
-            </View>
+    const [taskListItems, setTaskListItems] = useState([]);
 
-            <View style={styles.items}>
-                <Task text='🦋' />
-                <Task text='🧚🏻‍♀️' />
-                <Task text='😇' />
-            </View>
+    return (
+        <View style={styles.app}>
+            <TaskList
+                taskListItems={taskListItems}
+                setTaskListItems={setTaskListItems}
+            />
+            <AddTask setTaskListItems={setTaskListItems} />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    app: {
         flex: 1,
         backgroundColor: '#E9EAED',
-        paddingLeft: 15,
-        paddingRight: 15,
-    },
-    tasksWrapper: {
-        paddingTop: 80,
-        paddingHorizontal: 5,
-    },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    items: {
-        marginTop: 30,
     },
 });
